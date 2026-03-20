@@ -84,13 +84,6 @@ export class CronJobToolService {
           case 'add': {
             if (!type) return '新增任务需要提供 type（cron/every/at）。';
             if (!instruction) return '新增任务需要提供 instruction。';
-            const looksLikeToolCall =
-              /\b(send_mail|web_search|db_users_crud|cron_job|query_user|time_now)\s*\(/.test(
-                instruction,
-              );
-            if (looksLikeToolCall) {
-              return 'instruction 必须是“要执行的任务内容”的自然语言描述，不能是工具调用或代码（例如不能写 send_mail(...)）。请把时间信息放到 type/at/everyMs/cron 中，把任务内容用自然语言写在 instruction 里。';
-            }
 
             if (type === 'cron') {
               if (!cron) return 'type=cron 时需要提供 cron。';
